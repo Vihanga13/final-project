@@ -1,4 +1,5 @@
-import 'package:fitness_app/password_reset_page.dart';
+import 'package:fitness_app/login_screen.dart';
+import 'package:fitness_app/scan_meal_page.dart';
 import 'package:flutter/material.dart';
 // Ensure this import is correct
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home:
-          ResetPasswordScreen(), // Ensure this class is defined in daily_limit_page.dart
+          ScanMealPage(), // Ensure this class is defined in daily_limit_page.dart
     );
   }
-}   
+}

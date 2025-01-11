@@ -24,37 +24,49 @@ class SettingsPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      
+
                       // Settings List
                       _buildSettingItem(
                         icon: Icons.person_outline,
                         title: 'Edit Profile',
-                        onTap: () {},
+                        onTap: () {
+                          // Handle Edit Profile tap
+                        },
                       ),
                       _buildSettingItem(
                         icon: Icons.lock_outline,
                         title: 'Change Password',
-                        onTap: () {},
+                        onTap: () {
+                          // Handle Change Password tap
+                        },
                       ),
                       _buildSettingItem(
                         icon: Icons.palette_outlined,
                         title: 'Theme',
-                        onTap: () {},
+                        onTap: () {
+                          // Handle Theme tap
+                        },
                       ),
                       _buildSettingItem(
                         icon: Icons.help_outline,
                         title: 'Help and Support',
-                        onTap: () {},
+                        onTap: () {
+                          // Handle Help and Support tap
+                        },
                       ),
                       _buildSettingItem(
                         icon: Icons.privacy_tip_outlined,
                         title: 'Privacy Policy',
-                        onTap: () {},
+                        onTap: () {
+                          // Handle Privacy Policy tap
+                        },
                       ),
                       _buildSettingItem(
                         icon: Icons.logout,
                         title: 'Log Out',
-                        onTap: () {},
+                        onTap: () {
+                          // Handle Log Out tap
+                        },
                         textColor: Colors.red,
                       ),
                     ],
@@ -62,44 +74,14 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // Bottom Navigation Bar
-            Container(
-              height: 60,
-              decoration: BoxDecoration(
-                color: const Color(0xFF8BC34A),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.home, color: Colors.white),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.settings, color: Colors.white),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
     );
   }
-  
+
   Widget _buildSettingItem({
     required IconData icon,
     required String title,
