@@ -1,4 +1,3 @@
-import 'package:fitness_app/login_screen.dart';
 import 'package:fitness_app/scan_meal_page.dart';
 import 'package:flutter/material.dart';
 // Ensure this import is correct
