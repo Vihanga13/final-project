@@ -1,154 +1,168 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MealHistoryApp());
-}
+class MealHistoryPage extends StatelessWidget {
+  const MealHistoryPage({Key? key}) : super(key: key);
 
-class MealHistoryApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MealHistoryScreen(),
-    );
-  }
-}
-
-class MealHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Meal History',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+      backgroundColor: Colors.white,
+
+      // Floating Action Button
+      floatingActionButton: SizedBox(
+        height: 80, // Increased height
+        width: 80, // Increased width
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.green,
+          child: const Icon(
+            Icons.qr_code_scanner,
+            color: Colors.black, // Scanner icon is black
+            size: 36, // Increased icon size
           ),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Column(
-        children: [
-          // Date Grid
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: GridView.count(
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              crossAxisSpacing: 6,
-              mainAxisSpacing: 6,
-              childAspectRatio: 1.2,
-              children: [
-                _buildDateTile(context, 'SUN', '15 Aug', isSelected: true),
-                _buildDateTile(context, 'MON', '16 Aug'),
-                _buildDateTile(context, 'TUE', '17 Aug'),
-                _buildDateTile(context, 'WED', '18 Aug'),
-                _buildDateTile(context, 'THU', '19 Aug'),
-                _buildDateTile(context, 'FRI', '20 Aug'),
-                _buildDateTile(context, 'SAT', '21 Aug'),
-              ],
-            ),
-          ),
-          // Meal List
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              children: [
-                _buildMealCard('Breakfast', '350 kcal', 'assets/breakfast.jpg'),
-                _buildMealCard('Lunch', '650 kcal', 'assets/lunch.jpg'),
-                _buildMealCard('Dinner', '200 kcal', 'assets/dinner.jpg'),
-              ],
-            ),
-          ),
-        ],
-      ),
-      // Floating Navigation Bar
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Handle QR scanner button press
-        },
-        backgroundColor: Colors.green,
-        child: Icon(Icons.qr_code_scanner,
-            size: 36, color: Colors.black), // Black QR scan icon
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      // Bottom Navigation Bar
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(  
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(Icons.home,
-                    color: Colors.black, size: 32), // Larger Home icon
-                onPressed: () {
-                  // Handle Home button press
-                },
+                onPressed: () {},
+                iconSize: 35, // Increased icon size
+                icon: const Icon(Icons.home, color: Colors.black), // Black icon
               ),
               IconButton(
-                icon: Icon(Icons.person,
-                    color: Colors.black, size: 32), // Larger Profile icon
-                onPressed: () {
-                  // Handle Profile button press
-                },
+                onPressed: () {},
+                iconSize: 35, // Increased icon size
+                icon:
+                    const Icon(Icons.person, color: Colors.black), // Black icon
               ),
             ],
+          ),
+        ),
+      ),
+
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Title
+                const Text(
+                  "Meal History",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Days of the Week Grid
+                GridView.count(
+                  crossAxisCount: 3,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  children: [
+                    _buildDayBox("SUN", "15 Aug", isSelected: true),
+                    _buildDayBox("MON", "16 Aug"),
+                    _buildDayBox("TUE", "17 Aug"),
+                    _buildDayBox("WED", "18 Aug"),
+                    _buildDayBox("THU", "19 Aug"),
+                    _buildDayBox("FRI", "20 Aug"),
+                    const SizedBox(), // Empty box to align SAT in the middle
+                    _buildDayBox("SAT", "21 Aug"),
+                    const SizedBox(), // Empty box for alignment
+                  ],
+                ),
+                const SizedBox(height: 24),
+
+                // Meal List
+                ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    _buildMealCard(
+                      imagePath:
+                          'assets/meal.jpg', // Replace with actual image path
+                      mealName: "Breakfast",
+                      calories: "350 kcal",
+                    ),
+                    const SizedBox(height: 16),
+                    _buildMealCard(
+                      imagePath:
+                          'assets/meal.jpg', // Replace with actual image path
+                      mealName: "Lunch",
+                      calories: "650 kcal",
+                    ),
+                    const SizedBox(height: 16),
+                    _buildMealCard(
+                      imagePath:
+                          'assets/meal.jpg', // Replace with actual image path
+                      mealName: "Dinner",
+                      calories: "200 kcal",
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  // Widget for a single date tile
-  Widget _buildDateTile(BuildContext context, String day, String date,
-      {bool isSelected = false}) {
-    return GestureDetector(
-      onTap: () {
-        // Handle tap event (e.g., navigate to another screen or update state)
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.green : Colors.grey[300],
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                day,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: isSelected ? Colors.white : Colors.black,
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                date,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: isSelected ? Colors.white : Colors.black,
-                  fontSize: 12,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  // Widget for a single meal card
-  Widget _buildMealCard(String meal, String calories, String imagePath) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12.0),
-      shape: RoundedRectangleBorder(
+  Widget _buildDayBox(String day, String date, {bool isSelected = false}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.green : Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              day,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: isSelected ? Colors.white : Colors.black,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              date,
+              style: TextStyle(
+                fontSize: 14,
+                color: isSelected ? Colors.white : Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMealCard({
+    required String imagePath,
+    required String mealName,
+    required String calories,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
@@ -158,39 +172,36 @@ class MealHistoryScreen extends StatelessWidget {
             height: 80,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8),
-                bottomLeft: Radius.circular(8),
+                topLeft: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
               ),
               image: DecorationImage(
-                image: AssetImage(imagePath),
+                image: AssetImage(imagePath), // Replace with actual image path
                 fit: BoxFit.cover,
               ),
             ),
           ),
+          const SizedBox(width: 16),
+
           // Meal Details
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    meal,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    calories,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                mealName,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
+              const SizedBox(height: 4),
+              Text(
+                calories,
+                style: const TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ],
           ),
         ],
       ),

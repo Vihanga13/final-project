@@ -1,6 +1,10 @@
-import 'package:fitness_app/scan_meal_page.dart';
+import 'package:fitness_app/goal_selection_page.dart';
+import 'package:fitness_app/help_and_support_page.dart';
+import 'package:fitness_app/landing_page.dart';
+import 'package:fitness_app/meal_history_page.dart';
+import 'package:fitness_app/privacy_page.dart';
+import 'package:fitness_app/scan_meal_page_cholesterol.dart';
 import 'package:flutter/material.dart';
-// Ensure this import is correct
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home:
-          ScanMealPage(), // Ensure this class is defined in daily_limit_page.dart
+          HelpAndSupportPage(), // Ensure this class is defined in daily_limit_page.dart
     );
   }
 }
